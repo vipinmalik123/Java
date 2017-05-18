@@ -1,0 +1,6 @@
+.settings/*
+docstore/*/*.*
+.project
+bin/*
+/target
+/bin

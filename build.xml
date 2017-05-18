@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    
+    <project name="JavaBase" default="default" basedir=".">
+        <description>Java Base application for testing</description>
+        
+        <property name="version" value="0"></property>
+        <property name="build.dir" value="${basedir}/build" ></property>
+        <property name="lib.dir" value="${basedir}/lib" ></property>
+    	<property name="resources.dir" value="${basedir}/resources" ></property>
+        
+        <path id="classpath">
+			<fileset dir="${lib.dir}" includes="**/*.jar" />
+		</path>
+        
+        <target name="default" depends="jar" description="description">
+		</target>
+        
+        <target name="prepare">
+            <mkdir dir="${basedir}/bin"></mkdir>
+        </target>
+        
+        <target name="classes" depends="prepare">
+            <javac srcdir="src/org" destdir="bin" classpathref="classpath"
+                debug="on" includeantruntime="false" target="1.6" source="1.6">
+            </javac>
+        </target>
+        
+        <target name="jar" depends="classes">
+            <jar destfile="${build.dir}/JavaBase.jar">
+				<fileset dir="bin" includes="**/*.class" />
+				<zipgroupfileset dir="${lib.dir}" includes="**/*.jar" />
+            	<fileset dir="${resources.dir}" />
+                <manifest>
+                    <attribute name="Implementation-Version" value="${version}"></attribute>
+                    <attribute name="Main-Class" value="org.vipinmalik.base.baseController"></attribute>
+                    <attribute name="Class-Path" value="iText-2.1.7.jar"></attribute>
+                </manifest>
+            </jar>
+        </target>
+    </project>
